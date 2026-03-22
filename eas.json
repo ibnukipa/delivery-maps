@@ -1,0 +1,17 @@
+{
+  "cli": {
+    "version": ">= 16.17.3",
+    "appVersionSource": "local"
+  },
+  "build": {
+    "preview": {
+      "distribution": "internal"
+    },
+    "production": {
+      "environment": "production"
+    }
+  },
+  "submit": {
+    "production": {}
+  }
+}

@@ -1,17 +1,17 @@
 {
   "fill" : {
-    "automatic-gradient" : "extended-srgb:0.00000,0.47843,1.00000,1.00000"
+    "automatic-gradient" : "extended-srgb:0.15294,0.73725,0.92157,1.00000"
   },
   "groups" : [
     {
       "layers" : [
         {
-          "image-name" : "expo-symbol 2.svg",
-          "name" : "expo-symbol 2",
+          "image-name" : "map-icon.svg",
+          "name" : "map-icon",
           "position" : {
             "scale" : 1,
             "translation-in-points" : [
-              1.1008400065293245e-05,
+              0,
               -16.046875
             ]
           }

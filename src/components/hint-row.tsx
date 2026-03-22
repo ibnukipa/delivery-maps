@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
   stepRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center'
   },
   codeSnippet: {
     borderRadius: Spacing.two,
