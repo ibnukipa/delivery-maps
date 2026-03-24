@@ -12,6 +12,42 @@ export const Colors = {
     backgroundElement: '#F0F0F3',
     backgroundSelected: '#E0E1E6',
     textSecondary: '#60646C',
+    
+    primary: '#208AEF',
+    onPrimary: '#FFFFFF',
+    primaryContainer: '#D6ECFC',
+    onPrimaryContainer: '#0A5FA8',
+    primaryMuted: '#A0CFEE',
+    
+    secondaryYellow: '#FFC107',
+    onSecondaryYellow: '#000000',
+    secondaryYellowContainer: '#FFF3CD',
+    onSecondaryYellowContainer: '#7A5800',
+    secondaryYellowMuted: '#FFD966',
+    
+    success: '#22C55E',
+    onSuccess: '#052E16',
+    successContainer: '#DCFCE7',
+    onSuccessContainer: '#15803D',
+    successMuted: '#86EFAC',
+    
+    info: '#3B82F6',
+    onInfo: '#EFF6FF',
+    infoContainer: '#DBEAFE',
+    onInfoContainer: '#1D4ED8',
+    infoMuted: '#93C5FD',
+    
+    warning: '#F59E0B',
+    onWarning: '#1C0A00',
+    warningContainer: '#FEF3C7',
+    onWarningContainer: '#92400E',
+    warningMuted: '#FCD34D',
+    
+    error: '#EF4444',
+    onError: '#FFF5F5',
+    errorContainer: '#FEE2E2',
+    onErrorContainer: '#B91C1C',
+    errorMuted: '#FCA5A5',
   },
   dark: {
     text: '#ffffff',
@@ -19,6 +55,42 @@ export const Colors = {
     backgroundElement: '#212225',
     backgroundSelected: '#2E3135',
     textSecondary: '#B0B4BA',
+    
+    primary: '#5BAAFF',
+    onPrimary: '#001B3A',
+    primaryContainer: '#003870',
+    onPrimaryContainer: '#A8D4FF',
+    primaryMuted: '#2E6FAF',
+
+    secondaryYellow: '#FFD54F',
+    onSecondaryYellow: '#1A1000',
+    secondaryYellowContainer: '#3D2E00',
+    onSecondaryYellowContainer: '#FFDF80',
+    secondaryYellowMuted: '#B38A00',
+    
+    success: '#4ADE80',
+    onSuccess: '#052E16',
+    successContainer: '#14532D',
+    onSuccessContainer: '#BBF7D0',
+    successMuted: '#166534',
+    
+    info: '#60A5FA',
+    onInfo: '#172554',
+    infoContainer: '#1E3A5F',
+    onInfoContainer: '#BAE6FD',
+    infoMuted: '#1E40AF',
+    
+    warning: '#FBBF24',
+    onWarning: '#1C0A00',
+    warningContainer: '#3D2200',
+    onWarningContainer: '#FDE68A',
+    warningMuted: '#92400E',
+    
+    error: '#F87171',
+    onError: '#2D0000',
+    errorContainer: '#450A0A',
+    onErrorContainer: '#FECACA',
+    errorMuted: '#7F1D1D',
   },
 } as const;
 
@@ -26,13 +98,9 @@ export type ThemeColor = keyof typeof Colors.light & keyof typeof Colors.dark;
 
 export const Fonts = Platform.select({
   ios: {
-    /** iOS `UIFontDescriptorSystemDesignDefault` */
     sans: 'system-ui',
-    /** iOS `UIFontDescriptorSystemDesignSerif` */
     serif: 'ui-serif',
-    /** iOS `UIFontDescriptorSystemDesignRounded` */
     rounded: 'ui-rounded',
-    /** iOS `UIFontDescriptorSystemDesignMonospaced` */
     mono: 'ui-monospace',
   },
   default: {
@@ -52,5 +120,3 @@ export const Spacing = {
   five: 32,
   six: 64,
 } as const;
-
-export const MaxContentWidth = 800;
