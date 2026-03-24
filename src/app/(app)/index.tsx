@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet } from 'react-native';
 
-import { AnimatedIcon } from '@/components/animated-icon';
+import { MapIconEntering } from '@/components/map-icon-entering';
 import { HintRow } from '@/components/hint-row';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
@@ -11,7 +11,7 @@ export default function HomeScreen() {
   return (
     <ThemedView style={styles.container}>
       <ThemedView style={styles.heroSection}>
-        <AnimatedIcon />
+        <MapIconEntering />
       </ThemedView>
       <ThemedView type="backgroundElement" style={styles.stepContainer}>
         <HintRow
