@@ -9,7 +9,7 @@ import { OptimisedStop } from "@/services/map.service";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { ActivityIndicator, Dimensions, FlatList, Pressable, StyleSheet, View } from "react-native";
+import { ActivityIndicator, Dimensions, FlatList, Platform, Pressable, StyleSheet, View } from "react-native";
 import MapView, { Marker, Polyline, PROVIDER_GOOGLE } from "react-native-maps";
 import Animated, { FadeIn, FadeOut, LinearTransition } from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -65,7 +65,7 @@ const DeliveryRoute = () => {
         showsMyLocationButton={true}
         mapPadding={{
           bottom: insets.bottom + Spacing.four + (hasData ? 150 + Spacing.three : 0),
-          top: Spacing.four,
+          top: Platform.select({ ios: Spacing.four, android: insets.top + Spacing.four }) ?? 0,
           right: Spacing.three,
           left: Spacing.four,
         }}
@@ -90,7 +90,7 @@ const DeliveryRoute = () => {
           />
         ))}
       </MapView>
-      <View style={styles.headerContainer} collapsable={false}>
+      <View style={[styles.headerContainer, { paddingTop: Platform.select({ ios: Spacing.four, android: insets.top + Spacing.four }) }]} collapsable={false}>
         <ThemedView style={styles.headerSummaryContainer}>
           {optimising ? (
             <Animated.View style={styles.headerOptimisingContainer} entering={FadeIn} exiting={FadeOut}>
