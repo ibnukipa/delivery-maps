@@ -25,6 +25,8 @@ const DeliveryRoute = () => {
   const { deliveries } = useDeliveries()
   const { driverLocation, route, optimising, markDelivered } = useOptimisedRoute(deliveries)
   
+  const hasData = !optimising && (route?.stops.length ?? 0) > 0
+  
   const renderDeliveryCard = useCallback(({item}: {item: OptimisedStop}) => {
     return (
       <Animated.View layout={LinearTransition} entering={FadeIn} exiting={FadeOut}>
@@ -62,7 +64,7 @@ const DeliveryRoute = () => {
         showsUserLocation
         showsMyLocationButton={true}
         mapPadding={{
-          bottom: insets.bottom + Spacing.four + 150 + Spacing.three,
+          bottom: insets.bottom + Spacing.four + (hasData ? 150 + Spacing.three : 0),
           top: Spacing.four,
           right: Spacing.three,
           left: Spacing.four,
@@ -97,12 +99,18 @@ const DeliveryRoute = () => {
                 Optimising...
               </ThemedText>
             </Animated.View>
-          ) : (
+          ) : hasData ? (
             <Animated.View entering={FadeIn} exiting={FadeOut}>
               <ThemedText type={'h4'}>
                 <ThemedText type={'h4'} themeColor={'primary'}>{route?.stops.length} stops</ThemedText>{' · '}
                 <ThemedText type={'h4'} themeColor={'textSecondary'}>{route?.totalDistance}</ThemedText>{' · '}
                 <ThemedText type={'h4'} themeColor={'success'}>{route?.totalDuration}</ThemedText>
+              </ThemedText>
+            </Animated.View>
+          ) : (
+            <Animated.View entering={FadeIn} exiting={FadeOut}>
+              <ThemedText themeColor={'textSecondary'}>
+                No Data
               </ThemedText>
             </Animated.View>
           )}
@@ -113,19 +121,18 @@ const DeliveryRoute = () => {
           </ThemedView>
         </Pressable>
       </View>
-      <View style={[styles.contentContainer, { paddingBottom: insets.bottom + Spacing.four }]}>
-        <FlatList
-          showsHorizontalScrollIndicator={false}
-          horizontal
-          contentContainerStyle={{ paddingHorizontal: Spacing.four, gap: Spacing.two }}
-          data={route?.stops ?? []}
-          keyExtractor={(item) => item.delivery.id}
-          renderItem={renderDeliveryCard}
-          ListEmptyComponent={
-            !optimising ? <ThemedText style={styles.empty}>No pending stops.</ThemedText> : null
-          }
-        />
-      </View>
+      {hasData ? (
+        <View style={[styles.contentContainer, { paddingBottom: insets.bottom + Spacing.four }]}>
+          <FlatList
+            showsHorizontalScrollIndicator={false}
+            horizontal
+            contentContainerStyle={{ paddingHorizontal: Spacing.four, gap: Spacing.two }}
+            data={route?.stops ?? []}
+            keyExtractor={(item) => item.delivery.id}
+            renderItem={renderDeliveryCard}
+          />
+        </View>
+      ) : null}
     </ThemedView>
   )
 }

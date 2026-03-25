@@ -19,6 +19,7 @@
     "@react-native-firebase/app": "^23.8.8",
     "@react-native-firebase/auth": "^23.8.8",
     "@react-native-firebase/firestore": "^23.8.8",
+    "@react-native-firebase/messaging": "^23.8.8",
     "@react-navigation/bottom-tabs": "^7.15.5",
     "@react-navigation/elements": "^2.9.10",
     "@react-navigation/native": "^7.1.33",
@@ -56,5 +57,10 @@
     "@types/react": "~19.2.2",
     "typescript": "~5.9.2"
   },
-  "private": true
+  "private": true,
+  "expo": {
+    "autolinking": {
+      "exclude": ["functions"]
+    }
+  }
 }

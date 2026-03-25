@@ -182,8 +182,7 @@ const OtpInput = forwardRef<OtpInputHandle, OtpInputProps>(
 const styles = StyleSheet.create({
   row: {
     flexDirection: "row",
-    gap: 10,
-    justifyContent: "space-between",
+    gap: 4,
     paddingBottom: 18,
   },
   hiddenInput: {
@@ -193,8 +192,8 @@ const styles = StyleSheet.create({
     opacity: 0,
   },
   box: {
-    width: 52,
-    height: 52,
+    flex: 1,
+    aspectRatio: 1,
     borderRadius: 10,
     alignItems: "center",
     justifyContent: "center",

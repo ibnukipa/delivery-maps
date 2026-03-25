@@ -35,7 +35,7 @@ function useOptimisedRoute(deliveries: Delivery[]) {
   
   useEffect(() => {
     const pending = deliveries.filter((d) => d.status === 'pending');
-    if (!driverLocation || pending.length === 0) return;
+    if (!driverLocation) return;
     
     runOptimisation(driverLocation, pending);
   }, [deliveries, driverLocation]);

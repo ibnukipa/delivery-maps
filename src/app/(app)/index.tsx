@@ -36,7 +36,7 @@ export default function HomeScreen() {
       </ThemedView>
       <Deliveries />
       <ThemedView style={[styles.footerContainer, { paddingBottom: insets.bottom + Spacing.three }]}>
-        <ThemedButton size={'large'} label={'Deliver Now'} onPress={handleToDeliveryRoute} />
+        <ThemedButton size={'large'} label={'Start Now'} onPress={handleToDeliveryRoute} />
       </ThemedView>
     </ThemedView>
   );

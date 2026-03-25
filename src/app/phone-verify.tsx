@@ -8,7 +8,7 @@ import { Spacing } from "@/constants/theme";
 import { handlePhoneNumberVerify } from "@/services/auth.service";
 import { FirebaseAuthTypes, getAuth, linkWithCredential } from "@react-native-firebase/auth";
 import React, { useRef, useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { Keyboard, Pressable, StyleSheet, View } from "react-native";
 import { KeyboardAvoidingView } from "react-native-keyboard-controller";
 import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
 import { PhoneAuthProvider } from '@react-native-firebase/auth'
@@ -22,14 +22,14 @@ const PhoneVerify = () => {
   const [isCodeLoading, setIsCodeLoading] = useState(false);
   const [phoneAuthSnapshot, setPhoneAuthSnapshot] = useState<PhoneAuthSnapshot>();
   const [isCodeError, setIsCodeError] = useState(false);
-
+  
   const handlePhoneNumberSubmit = () => {
     const isValid = phoneRef.current?.validate();
     if (!isValid) return;
     
     const phone = phoneRef.current?.getRawValue();
     if (!phone) return;
-
+    
     setLoading(true)
     handlePhoneNumberVerify(`+${phone}`).then((snapshot) => {
       if (!snapshot) {
@@ -54,9 +54,7 @@ const PhoneVerify = () => {
       setIsCodeLoading(true);
       const currentUser = getAuth().currentUser
       if (currentUser) {
-        console.log('validating code')
-        const userData = await linkWithCredential(currentUser, PhoneAuthProvider.credential(phoneAuthSnapshot?.verificationId, code))
-        console.log('userData', userData)
+        await linkWithCredential(currentUser, PhoneAuthProvider.credential(phoneAuthSnapshot?.verificationId, code))
       }
     } catch (error) {
       setIsCodeError(true);
@@ -77,57 +75,60 @@ const PhoneVerify = () => {
       otpRef.current?.focus();
     } finally {
       setIsCodeLoading(false)
+      Keyboard.dismiss()
     }
   }
   
   return (
-    <KeyboardAvoidingView behavior={'height'} style={{ flex: 1 }}>
-      {phoneAuthSnapshot ? (
-        <Animated.View key={'otp-input'} entering={FadeIn} exiting={FadeOut} style={{ flex: 1 }}>
-          <ThemedView type={'background'} style={styles.container}>
-            <View style={{ alignSelf: 'center' }}>
-              <ThemedText type={'display'}>Verification Code</ThemedText>
-            </View>
-            <ThemedView style={styles.contentContainer}>
-              <OtpInput
-                ref={otpRef}
-                length={6}
-                masked={false}
-                onComplete={handleConfirmCode}
-                error={isCodeError}
-                onChange={() => setIsCodeError(false)}
-              />
-              <ThemedView>
-                <ThemedButton
-                  loading={isCodeLoading}
-                  size={'large'} label={'Verify'}
-                  onPress={() => otpRef.current?.submit()}/>
+    <Pressable style={{ flex: 1 }} onPress={Keyboard.dismiss}>
+      <KeyboardAvoidingView behavior={'height'} style={{ flex: 1 }}>
+        {phoneAuthSnapshot ? (
+          <Animated.View key={'otp-input'} entering={FadeIn} exiting={FadeOut} style={{ flex: 1 }}>
+            <ThemedView type={'background'} style={styles.container}>
+              <View style={{ alignSelf: 'center' }}>
+                <ThemedText type={'display'}>Verification Code</ThemedText>
+              </View>
+              <ThemedView style={styles.contentContainer}>
+                <OtpInput
+                  ref={otpRef}
+                  length={6}
+                  masked={false}
+                  onComplete={handleConfirmCode}
+                  error={isCodeError}
+                  onChange={() => setIsCodeError(false)}
+                />
+                <ThemedView>
+                  <ThemedButton
+                    loading={isCodeLoading}
+                    size={'large'} label={'Verify'}
+                    onPress={() => otpRef.current?.submit()}/>
+                </ThemedView>
               </ThemedView>
             </ThemedView>
-          </ThemedView>
-        </Animated.View>
-      ) : (
-        <Animated.View key={'phone-input'} entering={FadeIn} exiting={FadeOut} style={{ flex: 1 }}>
-          <ThemedView type={'background'} style={styles.container}>
-            <View style={{ alignSelf: 'center' }}>
-              <ThemedText type={'display'}>Phone Number</ThemedText>
-            </View>
-            <ThemedView style={styles.contentContainer}>
-              <PhoneInput
-                ref={phoneRef}
-                placeholder="+62 812 3456 7890"
-              />
-              <ThemedView>
-                <ThemedButton
-                  loading={loading}
-                  size={'large'} label={'Send Code'}
-                  onPress={handlePhoneNumberSubmit}/>
+          </Animated.View>
+        ) : (
+          <Animated.View key={'phone-input'} entering={FadeIn} exiting={FadeOut} style={{ flex: 1 }}>
+            <ThemedView type={'background'} style={styles.container}>
+              <View style={{ alignSelf: 'center' }}>
+                <ThemedText type={'display'}>Phone Number</ThemedText>
+              </View>
+              <ThemedView style={styles.contentContainer}>
+                <PhoneInput
+                  ref={phoneRef}
+                  placeholder="+62 812 3456 7890"
+                />
+                <ThemedView>
+                  <ThemedButton
+                    loading={loading}
+                    size={'large'} label={'Send Code'}
+                    onPress={handlePhoneNumberSubmit}/>
+                </ThemedView>
               </ThemedView>
             </ThemedView>
-          </ThemedView>
-        </Animated.View>
-      )}
-    </KeyboardAvoidingView>
+          </Animated.View>
+        )}
+      </KeyboardAvoidingView>
+    </Pressable>
   )
 }
 

@@ -39,12 +39,16 @@ const Deliveries = () => {
       )
     }
     
-    return (
-      <View style={styles.footerContainer}>
-        <ThemedText themeColor={'textSecondary'}>All deliveries loaded</ThemedText>
-      </View>
-    )
-  }, [hasMore])
+    if (!hasMore && deliveries.length > 0) {
+      return (
+        <View style={styles.footerContainer}>
+          <ThemedText themeColor={'textSecondary'}>All deliveries loaded</ThemedText>
+        </View>
+      )
+    }
+    
+    return null
+  }, [hasMore, deliveries.length])
   
   return (
     <FlatList

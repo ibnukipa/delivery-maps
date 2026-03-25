@@ -12,7 +12,13 @@ export default {
       icon: './assets/map.icon',
       buildNumber: String(pkg.buildNumber),
       googleServicesFile: './secrets/GoogleService-Info.plist',
-      bundleIdentifier: 'com.ipdev.deliverymaps'
+      bundleIdentifier: 'com.ipdev.deliverymaps',
+      infoPlist: {
+        UIBackgroundModes: ['fetch', 'remote-notification'],
+      },
+      entitlements: {
+        'aps-environment': 'development'
+      },
     },
     android: {
       adaptiveIcon: {
@@ -67,7 +73,20 @@ export default {
         }
       ],
       '@react-native-firebase/app',
-      '@react-native-firebase/auth'
+      '@react-native-firebase/auth',
+      [
+        '@react-native-firebase/messaging',
+        {
+          android: {
+            defaultChannel: {
+              id: 'deliveries',
+              name: 'Delivery Notifications',
+              importance: 4, // HIGH
+              sound: 'default',
+            },
+          },
+        },
+      ],
     ],
     experiments: {
       typedRoutes: true,

@@ -10,10 +10,15 @@ import * as SplashScreen from 'expo-splash-screen'
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { KeyboardProvider } from "react-native-keyboard-controller";
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
+import { setBackgroundMessageHandler, getMessaging } from '@react-native-firebase/messaging';
 
 SplashScreen.preventAutoHideAsync();
 SplashScreen.setOptions({
   fade: true,
+});
+
+setBackgroundMessageHandler(getMessaging(), async (remoteMessage) => {
+  console.log('Background message:', remoteMessage);
 });
 
 const RootNavigator = () => {

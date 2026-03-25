@@ -1,6 +1,9 @@
+import useNotifications from "@/hooks/domain/use-notifications";
 import { Stack } from 'expo-router';
 
 export default function AppLayout() {
+  useNotifications();
+
   return (
     <Stack screenOptions={{ headerShown: false }}>
       <Stack.Screen name={'index'} />
