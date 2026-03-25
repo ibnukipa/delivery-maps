@@ -21,7 +21,7 @@ import QueryDocumentSnapshot = FirebaseFirestoreTypes.QueryDocumentSnapshot;
 
 export const PAGE_SIZE = 5;
 
-export function subscribeToDeliveries(
+export function subscribeToPaginatedDeliveries(
   driverUid: string,
   onChange: (
     deliveries: Delivery[],
@@ -53,6 +53,36 @@ export function subscribeToDeliveries(
       
       const lastDoc = docs[docs.length - 1] ?? null;
       onChange(data, lastDoc, hasMore);
+    },
+    onError
+  );
+}
+
+export function subscribeToDeliveries(
+  driverUid: string,
+  onChange: (deliveries: Delivery[]) => void,
+  onError: (error: Error) => void
+) {
+  const db = getFirestore();
+  const q = query(
+    collection(db, 'deliveries'),
+    where('driverUid', '==', driverUid),
+    where('status', 'in', ['pending', 'delivered']),
+    orderBy('createdAt', 'asc'),
+  );
+  
+  return onSnapshot(
+    q,
+    (snapshot) => {
+      const docs = snapshot.docs;
+      
+      const data = docs.map((d: DocumentData) => ({
+        id: d.id,
+        ...d.data(),
+        createdAt: d.data().createdAt?.toDate(),
+      })) as Delivery[];
+      
+      onChange(data);
     },
     onError
   );

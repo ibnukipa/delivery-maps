@@ -84,13 +84,13 @@ const ThemedButton = ({
       ) : (
         <>
           {iconLeft && (
-            <View style={{ marginRight: dims.gap - 2 }}>{iconLeft}</View>
+            <View style={{ marginRight: dims.gap }}>{iconLeft}</View>
           )}
           <Text style={labelStyle} numberOfLines={1}>
             {label}
           </Text>
           {iconRight && (
-            <View style={{ marginLeft: dims.gap - 2 }}>{iconRight}</View>
+            <View style={{ marginLeft: dims.gap }}>{iconRight}</View>
           )}
         </>
       )}

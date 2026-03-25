@@ -53,6 +53,19 @@ export default {
           }
         }
       ],
+      [
+        'react-native-maps',
+        {
+          iosGoogleMapsApiKey: process.env.EXPO_PUBLIC_GOOGLE_MAPS_API_KEY,
+          androidGoogleMapsApiKey: process.env.EXPO_PUBLIC_GOOGLE_MAPS_API_KEY
+        }
+      ],
+      [
+        'expo-location',
+        {
+          locationAlwaysAndWhenInUsePermission: 'The Delivery Maps app need your location to calculate optimised delivery route.'
+        }
+      ],
       '@react-native-firebase/app',
       '@react-native-firebase/auth'
     ],

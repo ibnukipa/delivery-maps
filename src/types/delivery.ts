@@ -3,7 +3,7 @@ export interface Delivery {
   driverUid: string;
   customerName: string;
   customerAddress: string;
-  customerCoordinates: { lat: number; lng: number };
+  customerAddressCoordinates: { lat: number; lng: number };
   status: 'pending' | 'in_transit' | 'delivered' | 'failed';
   createdAt: Date;
 }

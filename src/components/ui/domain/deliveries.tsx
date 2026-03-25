@@ -1,14 +1,14 @@
 import { ThemedText } from "@/components/core/themed-text";
 import DeliverySnippet from "@/components/ui/domain/delivery-snippet";
 import { Spacing } from "@/constants/theme";
-import useDeliveries from "@/hooks/domain/use-deliveries";
+import usePaginatedDeliveries from "@/hooks/domain/use-paginated-deliveries";
 import { Delivery } from "@/types/delivery";
 import { useCallback } from "react";
 import { ActivityIndicator, FlatList, StyleSheet, View } from "react-native";
 import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
 
 const Deliveries = () => {
-  const { deliveries, loading, loadMore, hasMore } = useDeliveries()
+  const { deliveries, loading, loadMore, hasMore } = usePaginatedDeliveries()
 
   const renderItem = useCallback(({ item }: { item: Delivery }) => {
     return <DeliverySnippet deliver={item}/>
