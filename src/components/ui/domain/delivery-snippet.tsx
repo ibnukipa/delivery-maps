@@ -10,7 +10,7 @@ const DeliverySnippet = ({ deliver }: { deliver: Delivery }) => {
     <Animated.View entering={FadeIn} exiting={FadeOut}>
       <ThemedView type={'primaryContainer'} style={styles.container}>
         <View style={styles.headerContainer}>
-          <ThemedText>#{deliver.id}</ThemedText>
+          <ThemedText numberOfLines={1} style={{ flex: 1 }}>#{deliver.id}asdf</ThemedText>
           <ThemedView type={'secondaryYellowContainer'} style={styles.statusContainer}>
             <ThemedText
               type={'smallBold'}
@@ -20,7 +20,7 @@ const DeliverySnippet = ({ deliver }: { deliver: Delivery }) => {
         </View>
         <View style={styles.contentContainer}>
           <ThemedText themeColor={'primary'} type={'h3'}>{deliver.customerName}</ThemedText>
-          <ThemedText themeColor={'textSecondary'}>{deliver.customerAddress}</ThemedText>
+          <ThemedText themeColor={'textSecondary'} numberOfLines={2}>{deliver.customerAddress}</ThemedText>
         </View>
       </ThemedView>
     </Animated.View>
@@ -35,7 +35,8 @@ const styles = StyleSheet.create({
   },
   headerContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    flex: 1
   },
   statusContainer: {
     paddingHorizontal: Spacing.two,

@@ -117,7 +117,7 @@ const DeliveryRoute = () => {
         </ThemedView>
         <Pressable onPress={router.back}>
           <ThemedView style={styles.headerIconClose}>
-            <Ionicons color={colors.textSecondary} name={'close-circle-outline'} size={48}/>
+            <Ionicons color={colors.textSecondary} name={'close-circle-outline'} size={38}/>
           </ThemedView>
         </Pressable>
       </View>
@@ -163,7 +163,11 @@ const styles = StyleSheet.create({
     gap: Spacing.two
   },
   headerIconClose: {
-    borderRadius: 999
+    borderRadius: 999,
+    height: 52,
+    aspectRatio: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   contentContainer: {
     position: 'absolute',

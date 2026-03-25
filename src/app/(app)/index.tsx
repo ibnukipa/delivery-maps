@@ -25,7 +25,7 @@ export default function HomeScreen() {
 
   return (
     <ThemedView style={styles.container}>
-      <ThemedView style={[styles.headerContainer, { paddingTop: insets.top }]}>
+      <ThemedView style={[styles.headerContainer, { paddingTop: insets.top + Spacing.three }]}>
         <Animated.View style={styles.headerIconContainer} entering={FadeInLeft}>
           <Image style={styles.headerIcon} source={require('@/assets/images/splash-icon.png')} />
         </Animated.View>

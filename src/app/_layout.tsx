@@ -2,6 +2,7 @@ import SplashOverlayEntering from "@/components/animations/splash-overlay-enteri
 import SettingsSheet, { SettingsSheetRef } from "@/components/ui/sheets/SettingsSheet";
 import ToastSheet, { ToastSheetRef } from "@/components/ui/sheets/ToastSheet";
 import { AuthProvider, useAuth } from "@/contexts/AuthContext";
+import { statusBarDarkStyleOpts, withoutHeaderOpts } from "@/utils/navigation.utils";
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { Stack } from 'expo-router'
 import React, { useEffect } from 'react';
@@ -31,17 +32,17 @@ const RootNavigator = () => {
   }, [authLoading]);
   
   return (
-    <Stack>
+    <Stack screenOptions={withoutHeaderOpts}>
       <Stack.Protected guard={!authUser?.phoneNumber && !!authUser}>
-        <Stack.Screen options={{ headerShown: false }} name={'phone-verify'} />
+        <Stack.Screen options={statusBarDarkStyleOpts} name={'phone-verify'} />
       </Stack.Protected>
 
       <Stack.Protected guard={!!authUser}>
-        <Stack.Screen options={{ headerShown: false }} name="(app)"/>
+        <Stack.Screen name="(app)"/>
       </Stack.Protected>
       
       <Stack.Protected guard={!authUser}>
-        <Stack.Screen options={{ headerShown: false }} name="sign-in"/>
+        <Stack.Screen options={statusBarDarkStyleOpts} name="sign-in"/>
       </Stack.Protected>
     </Stack>
   )
