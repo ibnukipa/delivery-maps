@@ -10,9 +10,8 @@ import {
   getDocs,
   doc,
   updateDoc,
-  addDoc,
-  Timestamp,
-  serverTimestamp, FirebaseFirestoreTypes
+  serverTimestamp,
+  FirebaseFirestoreTypes,
 } from '@react-native-firebase/firestore';
 import type { Delivery } from '@/types/delivery';
 
@@ -102,7 +101,7 @@ export async function loadMoreDeliveries(
     startAfter(lastDoc),
     limit(PAGE_SIZE + 1)
   );
-  
+
   const snapshot = await getDocs(q);
   const hasMore = snapshot.docs.length > PAGE_SIZE;
   const docs = hasMore ? snapshot.docs.slice(0, PAGE_SIZE) : snapshot.docs;
@@ -128,22 +127,4 @@ export async function updateDeliveryStatus(
     status,
     updatedAt: serverTimestamp(),
   });
-}
-
-export async function generateDummyDeliveries(driverUid: string) {
-  const db = getFirestore();
-  const dummies = [];
-  
-  await Promise.all(
-    dummies.map((d) =>
-      addDoc(collection(db, 'deliveries'), {
-        driverUid,
-        customerName: d.customerName,
-        customerAddress: d.customerAddress,
-        customerAddressCoordinates: { lat: d.lat, lng: d.lng },
-        status: 'pending',
-        createdAt: Timestamp.now(),
-      })
-    )
-  );
 }

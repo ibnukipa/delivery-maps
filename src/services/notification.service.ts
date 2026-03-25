@@ -4,8 +4,29 @@ import {
   registerDeviceForRemoteMessages
 } from '@react-native-firebase/messaging';
 import { getFirestore, doc, setDoc, serverTimestamp } from '@react-native-firebase/firestore';
+import { PermissionsAndroid, Platform } from "react-native";
+
+async function requestUserNotificationPermission() {
+  let enabled = false;
+  const firebasePermissionResult = await requestPermission(getMessaging());
+  if (Platform.OS === "ios") {
+    enabled =
+      firebasePermissionResult === AuthorizationStatus.AUTHORIZED ||
+      firebasePermissionResult === AuthorizationStatus.PROVISIONAL;
+  } else if (Platform.OS === "android") {
+    if (Platform.Version < 33) {
+      return true;
+    }
+    const nativePermissionResult = await PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS,
+    );
+    enabled = nativePermissionResult === PermissionsAndroid.RESULTS.GRANTED;
+  }
+  return enabled;
+}
 
 export async function registerFCMToken() {
+  await requestUserNotificationPermission()
   const authStatus = await requestPermission(getMessaging());
   const enabled =
     authStatus === AuthorizationStatus.AUTHORIZED ||

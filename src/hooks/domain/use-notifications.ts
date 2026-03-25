@@ -1,14 +1,11 @@
 import { useEffect } from 'react';
 import { getMessaging, onMessage, onNotificationOpenedApp, getInitialNotification } from '@react-native-firebase/messaging';
-import { useRouter } from 'expo-router';
 import {
   registerFCMToken,
   listenForTokenRefresh,
 } from '@/services/notification.service';
 
 function useNotifications() {
-  const router = useRouter();
-  
   useEffect(() => {
     // register token on mount
     registerFCMToken();

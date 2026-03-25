@@ -14,7 +14,7 @@ function usePaginatedDeliveries() {
   const [deliveries, setDeliveries] = useState<Delivery[]>([]);
   const [loading, setLoading] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
-  const [hasMore, setHasMore] = useState(true);
+  const [hasMore, setHasMore] = useState(false);
   const [error, setError] = useState<string | null>(null);
   
   const lastDocRef = useRef<QueryDocumentSnapshot<DocumentData> | null>(null);

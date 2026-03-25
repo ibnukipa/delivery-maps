@@ -31,7 +31,7 @@ const deliveries = [
 ];
 
 // ← your Firebase Auth UID
-const DRIVER_UID = 'tWuqQwL0wgePIpm8aNvPbjy0zki2';
+const DRIVER_UID = 'your-uuid-here';
 
 async function seed() {
   for (const d of deliveries) {

@@ -121,7 +121,7 @@ const DeliveryRoute = () => {
           </ThemedView>
         </Pressable>
       </View>
-      {hasData ? (
+      {(optimising || (route?.stops.length ?? 0) > 0) ? (
         <View style={[styles.contentContainer, { paddingBottom: insets.bottom + Spacing.four }]}>
           <FlatList
             showsHorizontalScrollIndicator={false}
